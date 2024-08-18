@@ -5,7 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = ({ accounts}: DoughnutChartProps) => {
+const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
 
     const data = {
         datasets: [
@@ -18,16 +18,16 @@ const DoughnutChart = ({ accounts}: DoughnutChartProps) => {
 
         labels: ['Nordea', 'S-pankki', 'OP']
     }
-  return <Doughnut 
-    data={data} 
-    options={{
-        cutout: '60%',
-        plugins: {
-            legend: {
-                display: false
+    return <Doughnut
+        data={data}
+        options={{
+            cutout: '60%',
+            plugins: {
+                legend: {
+                    display: false
+                }
             }
-        }
-    }}
+        }}
     />
 }
 

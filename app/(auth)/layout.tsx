@@ -1,12 +1,12 @@
 export default function RootLayout({
     children,
-  }: Readonly<{
+}: Readonly<{
     children: React.ReactNode;
-  }>) {
-      return (
-          <main>
-              AUTH PAGE WITHOUT SIDEBAR
-              {children}
-          </main>
-      )
-  }
+}>) {
+    return (
+        <main>
+            AUTH PAGE WITHOUT SIDEBAR
+            {children}
+        </main>
+    )
+}
