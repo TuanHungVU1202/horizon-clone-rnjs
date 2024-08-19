@@ -4,7 +4,7 @@ import TotalBalanceBox from '@/components/TotalBalanceBox';
 import React from 'react'
 
 function Home() {
-    const loggedIn = { firstName: "Dude", lastName: "No Left", email: "xyz@icloud.com" };
+    const loggedIn = { firstName: "Right", lastName: "Not Left", email: "xyz@icloud.com" };
 
     return (
         <section className='home'>
@@ -25,10 +25,10 @@ function Home() {
                 </header>
             </div>
 
-            <RightSidebar 
+            <RightSidebar
                 user={loggedIn}
                 transacetions={[]}
-                banks={[ {}, {}]}
+                banks={[{ currentBalance: 1234.432 }, { currentBalance: 5678.901 }]}
             />
         </section>
     )
