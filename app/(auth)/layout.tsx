@@ -5,7 +5,6 @@ export default function RootLayout({
 }>) {
     return (
         <main>
-            AUTH PAGE WITHOUT SIDEBAR
             {children}
         </main>
     )
