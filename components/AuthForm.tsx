@@ -58,9 +58,9 @@ function AuthForm({ type }: { type: string }) {
             }
             else if (type === 'sign-up') {
                 // Sign up logic goes here
-                // const newUser = await signUp(data);
+                const newUser = await signUp(data);
 
-                // setUser(newUser);
+                setUser(newUser);
             }
 
         } catch (error) {

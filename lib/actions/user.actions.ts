@@ -1,5 +1,10 @@
 'use server';
 
+import { ID } from "node-appwrite";
+import { createAdminClient, createSessionClient } from "../appwrite";
+import { cookies } from "next/headers";
+import { parseStringify } from "../utils";
+
 export const signIn = ({ email, password }: signInProps) => {
     try {
         return "1";
@@ -9,11 +14,39 @@ export const signIn = ({ email, password }: signInProps) => {
     }
 }
 
-export const signUp = (userData: SignUpParams) => {
+export const signUp = async (userData: SignUpParams) => {
+    const { email, password, firstName, lastName } = userData;
     try {
-        return "1"; //User here, but placeholder now...
+        const { account } = await createAdminClient();
+
+        const newUserAccount = await account.create(
+            ID.unique(),
+            userData.email,
+            userData.password,
+            `${firstName} ${lastName}`,
+        );
+
+        const session = await account.createEmailPasswordSession(email, password);
+
+        cookies().set("appwrite-session", session.secret, {
+            path: "/",
+            httpOnly: true,
+            sameSite: "strict",
+            secure: true,
+        });
+
+        return parseStringify(newUserAccount);
     } catch (error) {
         console.error('Error signing up:', error);
         throw new Error('Failed to sign up');
+    }
+}
+
+export async function getLoggedInUser() {
+    try {
+        const { account } = await createSessionClient();
+        return await account.get();
+    } catch (error) {
+        return null;
     }
 }
