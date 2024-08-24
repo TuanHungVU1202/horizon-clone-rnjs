@@ -5,9 +5,12 @@ import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
-export const signIn = ({ email, password }: signInProps) => {
+export const signIn = async ({ email, password }: signInProps) => {
     try {
-        return "1";
+        const { account } = await createAdminClient();
+        const respnose = await account.createEmailPasswordSession(email, password);
+
+        return parseStringify(respnose);
     } catch (error) {
         console.error('Error signing in:', error);
         throw new Error('Failed to sign in');
@@ -45,8 +48,11 @@ export const signUp = async (userData: SignUpParams) => {
 export async function getLoggedInUser() {
     try {
         const { account } = await createSessionClient();
-        return await account.get();
+        const user = await account.get();
+
+        return parseStringify(user);
     } catch (error) {
+        console.log(error)
         return null;
     }
 }

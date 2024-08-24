@@ -21,7 +21,7 @@ import CustomInput from "./CustomInput"
 import { authFormSchema } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { signIn, signUp } from "@/lib/actions/user.actions"
+import { getLoggedInUser, signIn, signUp } from "@/lib/actions/user.actions"
 
 
 function AuthForm({ type }: { type: string }) {
@@ -193,7 +193,7 @@ function AuthForm({ type }: { type: string }) {
                                     {isLoading ? (
                                         <>
                                             <Loader2 size={20} className="animate-spin" /> &nbsp;
-                                            Signing in...
+                                            Loading...
                                         </>
                                     ) : type === 'sign-in' ? 'Sign In' : 'Sign Up'}
                                 </Button>
